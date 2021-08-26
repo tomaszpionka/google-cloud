@@ -24,3 +24,9 @@ def create_table(dataset_name: str, table_name: str):
     except (BadRequest, Conflict, NotFound) as e:
         print('ERROR: {}'.format(e))
     # [END bigquery_create_table]
+
+"""Provide parameters and run the script"""
+dataset = ""
+table = ""
+
+create_table(dataset_name=dataset,table_name=table)
