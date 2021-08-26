@@ -1,4 +1,4 @@
-# google-cloud
+# google-cloud :cloud:
  
 Set of scripts to make using BigQuery with Python easier.
 
