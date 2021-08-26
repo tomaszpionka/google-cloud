@@ -1,6 +1,6 @@
 # google-cloud
  
-Set of scripts to make using BigQuery with Python scripts easier.
+Set of scripts to make using BigQuery with Python easier.
 
 ## Prerequisites
 
