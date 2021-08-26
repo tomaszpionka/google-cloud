@@ -1,21 +1,17 @@
 from google.cloud import bigquery
-from google.oauth2 import service_account
+# from google.oauth2 import service_account
 from google.api_core.exceptions import BadRequest, Conflict, NotFound
+from authenticate import create_client
 
-# TODO(developer): Set key_path to the path to the service account key file.
-key_path = "credentials\service_account_key.json"
+# TODO(developer): Set key_path to the path to the service account key file in authenticate.py.
 
-credentials = service_account.Credentials.from_service_account_file(
-    key_path, scopes=["https://www.googleapis.com/auth/cloud-platform"],
-)
+def create_table(dataset_name, table_name):
 
-def create_table(dataset_name, table_name, credentials=credentials):
+    # Call a BigQuery client object contructor.
+    client = create_client()
+    table_id = "{}.{}.{}".format(client.project, dataset_name, table_name)
 
-    # Construct a BigQuery client object.
-    client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
-
-    table_id = "{}.{}.{}".format(credentials.project_id, dataset_name, table_name)
-
+    # Provide schema for your table
     schema = [
         bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
