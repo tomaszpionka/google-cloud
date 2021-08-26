@@ -1,15 +1,13 @@
 from google.cloud import bigquery
-# from google.oauth2 import service_account
 from google.api_core.exceptions import BadRequest, Conflict, NotFound
 from authenticate import create_client
 
 # TODO(developer): Set key_path to the path to the service account key file in authenticate.py.
 
-def create_table(dataset_name, table_name):
+def create_table(dataset_name: str, table_name: str):
 
     # Call a BigQuery client object contructor.
     client = create_client()
-    table_id = "{}.{}.{}".format(client.project, dataset_name, table_name)
 
     # Provide schema for your table
     schema = [
@@ -17,7 +15,7 @@ def create_table(dataset_name, table_name):
         bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
     ]
 
-    table = bigquery.Table(table_id, schema=schema)
+    table = bigquery.Table("{}.{}.{}".format(client.project, dataset_name, table_name), schema=schema)
 
     try:
         job = client.create_table(table)  # Make an API request.
